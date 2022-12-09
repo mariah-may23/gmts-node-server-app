@@ -26,4 +26,4 @@ export const deleteUser = (uid) =>
 
 export const updateUser = (uid, userUpdates) =>
     usersModel.updateOne({_id:uid},
-                         {$set:{userName:userUpdates}})
+                         {$set:userUpdates})
