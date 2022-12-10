@@ -1,11 +1,20 @@
 import mongoose from "mongoose";
 import express from 'express';
-
 import cors from 'cors';
 import UsersController from "./users/users-controller.js";
 
+const options = {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+   serverSelectionTimeoutMS: 5000,
+   autoIndex: false,
+   maxPoolSize: 10,
+   socketTimeoutMS: 45000,
+   family: 4
+};
 
-mongoose.connect('mongodb://localhost:27017/cs5610-fa22');
+
+mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
 // load the mongoose library
 // connect to the database
 

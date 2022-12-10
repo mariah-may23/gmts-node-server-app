@@ -9,15 +9,16 @@ export const createUser = (user) =>
 export const findAllUsers = () =>
     usersModel.find()
 
+// update this COME BACK LATER
 export const findUserById = (uid) =>
-    usersModel.findById()
+    usersModel.findOne({_id: uid})
 
-export const findByUsername = (username) =>
-    usersModel.findOne({username: username})
+export const findByUsername = (userName) =>
+    usersModel.findOne({userName: userName})
 
-export const findByCredentials = (username, password) =>
+export const findByCredentials = (userName, password) =>
     usersModel.findOne(
-        {username,password},
+        {userName,password},
         {password:false})
 // IF WE FIND A USER, WE DONT WANT TO PASS THE PASSWORD OUTSIDE OF OUR SERVER
 
@@ -26,4 +27,4 @@ export const deleteUser = (uid) =>
 
 export const updateUser = (uid, userUpdates) =>
     usersModel.updateOne({_id:uid},
-                         {$set:{username:userUpdates}})
+                         {$set:userUpdates})

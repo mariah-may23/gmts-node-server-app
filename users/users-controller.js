@@ -1,6 +1,6 @@
 import * as dao from './users-dao.js'
 import res from "express/lib/response.js";
-import {findByCredentials, findByUsername} from "./users-dao.js";
+import {findByCredentials, findByUsername, findUserById} from "./users-dao.js";
 
 //APIS FOR BEING ABLE TO CREATE,RETREIVE,DELETE,UODATE SPECIFIC USERS
 let currentUser = null;
@@ -16,6 +16,13 @@ const usersController = (app) => {
         const users = await dao.findAllUsers()
         res.json(users)
     }
+    const findUserById = async (req, res) => {
+        const users = await dao.findAllUsers()
+        const uid = req.params.uid
+        const status = await dao.findUserById(uid)
+        res.json(status)
+
+    }
     const deleteUser = async (req, res) => {
         const uid = req.params.uid
         const status = await dao.deleteUser(uid)
@@ -27,10 +34,9 @@ const usersController = (app) => {
         const status = await dao.updateUser(uid, updates)
         res.json(status)
     }
-
     const register = async (req,res) => {
         const user = req.body
-        const existingUser = await findByUsername(user.username)
+        const existingUser = await findByUsername(user.userName)
        if(existingUser) {
             res.sendStatus(403)
             return
@@ -42,7 +48,7 @@ const usersController = (app) => {
     }
     const login = async (req,res) => {
         const credentials = req.body
-        const existingUser = await findByCredentials(credentials.username, credentials.password)
+        const existingUser = await findByCredentials(credentials.userName, credentials.password)
         if(!existingUser){
             res.sendStatus(403)
             return
@@ -67,6 +73,7 @@ const usersController = (app) => {
     app.post('/users', createUser)
     app.post('/register', register)
     app.get('/users', findAllUsers)
+    app.get('/users/:uid', findUserById)
     app.delete('/users/:uid', deleteUser)
     app.put('/users/:uid', updateUser)
     app.post('/login',login)
