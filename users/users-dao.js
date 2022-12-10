@@ -9,8 +9,9 @@ export const createUser = (user) =>
 export const findAllUsers = () =>
     usersModel.find()
 
+// update this COME BACK LATER
 export const findUserById = (uid) =>
-    usersModel.findById()
+    usersModel.findOne({_id: uid})
 
 export const findByUsername = (userName) =>
     usersModel.findOne({userName: userName})
