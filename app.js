@@ -13,8 +13,11 @@ const options = {
    family: 4
 };
 
+const CONNECTION_STRING = 'mongodb+srv://FullStackers:cs5610@cluster0.rsy6kny.mongodb.net/?retryWrites=true&w=majority'
 
-mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
+//mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
+
+mongoose.connect('mongodb+srv://FullStackers:cs5610@cluster0.rsy6kny.mongodb.net/GMTS?retryWrites=true&w=majority', options);
 // load the mongoose library
 // connect to the database
 
