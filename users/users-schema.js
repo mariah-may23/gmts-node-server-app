@@ -13,7 +13,7 @@ const usersSchema = mongoose.Schema({
         state: String,
         zipcode: String,
         email: String,
-        uid: Number,
+        uid: {type: Number, unique: true},
 
         type : {type:String, enum: ['BUYER', 'SELLER', 'ADMIN']}
     },  {collection: 'users'})
