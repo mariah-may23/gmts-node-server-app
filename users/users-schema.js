@@ -13,6 +13,8 @@ const usersSchema = mongoose.Schema({
         state: String,
         zipcode: String,
         email: String,
+        uid: Number,
+
         type : {type:String, enum: ['BUYER', 'SELLER', 'ADMIN']}
     },  {collection: 'users'})
 export default usersSchema

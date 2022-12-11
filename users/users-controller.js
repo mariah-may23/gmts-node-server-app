@@ -12,28 +12,36 @@ const usersController = (app) => {
         const actualUser = await dao.createUser(user)
         res.json(actualUser)
     }
+
     const findAllUsers = async (req, res) => {
         const users = await dao.findAllUsers()
         res.json(users)
     }
+
     const findUserById = async (req, res) => {
-        const users = await dao.findAllUsers()
+        //const users = await dao.findAllUsers()
         const uid = req.params.uid
+        console.log("printing user")
+        console.log(uid)
         const status = await dao.findUserById(uid)
         res.json(status)
 
     }
+
     const deleteUser = async (req, res) => {
         const uid = req.params.uid
+
         const status = await dao.deleteUser(uid)
         res.json(status)
     }
+
     const updateUser = async (req, res) => {
         const uid = req.params.uid
         const updates = req.body
         const status = await dao.updateUser(uid, updates)
         res.json(status)
     }
+
     const register = async (req,res) => {
         const user = req.body
         const existingUser = await findByUsername(user.userName)
@@ -41,11 +49,13 @@ const usersController = (app) => {
             res.sendStatus(403)
             return
         }
+
         const actualUser = await dao.createUser(user)
         currentUser = actualUser
         res.json(actualUser)
 
     }
+
     const login = async (req,res) => {
         const credentials = req.body
         const existingUser = await findByCredentials(credentials.userName, credentials.password)
@@ -57,6 +67,7 @@ const usersController = (app) => {
         res.json(existingUser)
 
     }
+
     const profile = async (req,res) => {
         if(currentUser){
             res.json(currentUser)
