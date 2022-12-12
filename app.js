@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import UsersController from "./users/users-controller.js";
 import CommentController from "./comments/comments-controller.js";
+import LikeController from "./likes/likes-controller.js";
 
 const options = {
    useNewUrlParser: true,
@@ -33,6 +34,7 @@ app.use(express.json())
 //dao returning a promise that is resolved when data comes back
 UsersController(app)
 CommentController(app)
+LikeController(app)
 
 app.listen(4000)
 
