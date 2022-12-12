@@ -21,7 +21,7 @@ const LikesController = (app) => {
 
         const newLike = req.body
         const insertedLike = await likesDao.userLikesSneaker(newLike)
-        res.json(insertedComment)
+        res.json(newLike)
     }
     const userUnlikesSneaker = async (req, res) => {
 
