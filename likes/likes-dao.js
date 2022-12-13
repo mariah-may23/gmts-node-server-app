@@ -10,11 +10,6 @@ export const userUnlikesSneaker = async(lid) => {
 export const findSneakersLikedByUser = async(uid) => {
     return await likesModel.find({uid: uid})
 }
-export const findUsersThatLikeSneakers = async(mid) => {
-    return await likesModel.find({sneaker: sid}, {sneaker: false})
-        .populate('user', 'userName')
-        .exec()
-}
 
 export const findAllLikes = async () =>
     await likesModel.find()

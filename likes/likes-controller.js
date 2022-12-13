@@ -1,20 +1,6 @@
 import * as likesDao from "./likes-dao.js";
 
 const LikesController = (app) => {
-    const populate = (
-        {
-            rawResults, fieldToPopulate,
-            sourceData, sourceField
-        }) => {
-        const populatedResults = rawResults.map((raw) => {
-            const source = sourceData.find(source => source[sourceField] === raw[fieldToPopulate])
-            return ({
-                ...raw,
-                [fieldToPopulate]: source
-            })
-        })
-        return populatedResults
-    }
 
 
     const userLikesSneaker = async (req, res) => {
@@ -23,6 +9,7 @@ const LikesController = (app) => {
         const insertedLike = await likesDao.userLikesSneaker(newLike)
         res.json(newLike)
     }
+
     const userUnlikesSneaker = async (req, res) => {
 
         const {uid, sid} = req.params
@@ -41,17 +28,12 @@ const LikesController = (app) => {
         res.json(sneakers)
     }
 
-    const findUsersThatLikeSneakers = async (req, res) => {
-        const sid = req.params.sid
-        const users = await likesDao.findUsersThatLikeSneakers(sid)
-        res.json(users)
-    }
 
     app.post('/likes', userLikesSneaker)
-    app.delete('/users/unlikes/:sid', userUnlikesSneaker)
+    app.delete('/unlikes/:lid', userUnlikesSneaker)
     app.get('/likes', findAllLikes)
-    app.get('/users/:uid/likes', findSneakersLikedByUser)
-    app.get('/sneakers/:sid/likes', findUsersThatLikeSneakers)
+    app.get('/likes/:uid', findSneakersLikedByUser)
+
 }
 
 export default LikesController;
