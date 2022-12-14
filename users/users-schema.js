@@ -14,7 +14,6 @@ const usersSchema = mongoose.Schema({
         zipcode: String,
         email: String,
         uid: {type: Number, unique: true},
-
         type : {type:String, enum: ['BUYER', 'SELLER', 'ADMIN']}
     },  {collection: 'users'})
 export default usersSchema
